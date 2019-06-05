@@ -43,14 +43,12 @@ public class Model {
 					if (!d1.equals(d2)) {
 						DefaultWeightedEdge edge = grafo.getEdge(d1, d2);
 						if (edge == null) {
-							//grafo.addEdge(d1, d2);
+							edge = grafo.addEdge(d1, d2);
 							double distanza= LatLngTool.distance(d1.getLat(), d2.getLat(), LengthUnit.KILOMETER);
-							//grafo.setEdgeWeight(edge, distanza);
-							Graphs.addEdgeWithVertices(grafo, d1, d2, distanza);
+							grafo.setEdgeWeight(edge, distanza);
+							//Graphs.addEdgeWithVertices(grafo, d1, d2, distanza);
 						}
-					}
-					
-					
+					}					
 					
 				}
 			}
@@ -66,7 +64,7 @@ public class Model {
 						DefaultWeightedEdge arco2 = grafo.getEdge(d2, dtemp);
 						double peso2= grafo.getEdgeWeight(arco2);
 						
-						return (int) -(peso2-peso1);
+						return Double.compare(peso1, peso2);
 					}
 				});
 			
